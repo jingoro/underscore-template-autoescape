@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Underscore Template Auto-Escape</title>
+  </head>
+<body>
+
+  <div id="test"></div>
+
+  <script type="text/html" id="message">
+    <p>Hello <%= name %>.</p>
+    <p>Do you like any of the following?</p>
+    <ul>
+      <% for (var i = 0; i < activities.length; i++) { %>
+        <li><%= activities[i] %></li>
+      <% } %>
+    </ul>
+    <p><%- salutationHTML %></p>
+  </script>
+  
+  <script src="http://documentcloud.github.com/underscore/underscore.js"></script>
+  <script src="underscore-template-autoescape.js"></script>
+  <script>
+
+    var testEl    = document.getElementById("test");
+    var messageEl = document.getElementById("message");
+    
+    var template = _.template(messageEl.innerHTML);
+    
+    testEl.innerHTML = template({
+      name: "George <em>Taggy</em>",
+      activities: [
+        "hiking",
+        "clapping",
+        "looking"
+      ],
+      salutationHTML: "<em>Sayonara</em>!"
+    });
+    
+  </script>
+</body>
